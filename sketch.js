@@ -1,13 +1,5 @@
-// Daniel Shiffman
-// http://codingtra.in
-// http://patreon.com/codingtrain
-// Code for: https://youtu.be/KkyIDI6rQJI
-
-// Purple Rain
-// (138, 43, 226)
-// (230, 230, 250) // background
-
 var drops = [];
+var r, g, b; 
 
 function setup() {
   createCanvas(640, 360);
@@ -22,9 +14,18 @@ function draw() {
     drops[i].fall();
     drops[i].show();
   }
+  if(keyIsPressed) {
+    for (drop of drops) {
+      drop.randomChange();
+    }
+  }
 }
+
 function mousePressed() {
-  for (let drop of drops) {
-    drop.changeColor();
+  this.r = random(1, 255);
+  this.g = random(1, 255);
+  this.b = random(1, 255);
+  for (drop of drops) {
+    drop.changeColor(this.r, this.g, this.b);
   }
 }

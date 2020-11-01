@@ -1,8 +1,3 @@
-// Daniel Shiffman
-// http://codingtra.in
-// http://patreon.com/codingtrain
-// Code for: https://youtu.be/KkyIDI6rQJI
-
 function Drop() {
   this.x = random(width);
   this.y = random(-500, -50);
@@ -30,7 +25,12 @@ function Drop() {
     stroke(this.r, this.g, this.b);
     line(this.x, this.y, this.x, this.y + this.len);
   };
-  this.changeColor = function() {
+  this.changeColor = function(r, g, b) {
+    this.r = r;
+    this.g = g;
+    this.b = b;
+  }
+  this.randomChange = function() {
     this.r = random(1, 255);
     this.g = random(1, 255);
     this.b = random(1, 255);
