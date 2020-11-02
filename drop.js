@@ -1,11 +1,23 @@
+// var colorList = {
+//   Red:"#FF0000",
+//   Orange:"#FF7F00",
+//   Yellow:"#FFFF00",
+//   Green:"#00FF00",
+//   Blue:"#0000FF",
+//   Indigo:"#2E2B5F",
+//   Violet:"#8B00FF",
+//   PrincePurple:"#8a2be2",
+//   White:"#ffffff",
+//   Black:"#000000"
+// }
+var colorList = ["#FF0000", "#FF7F00", "#FFFF00", "#00FF00", "#0000FF", "#2E2B5F", "#8B00FF", "#8a2be2", "#ffffff", "#000000"];
+
 function Drop() {
   this.x = random(width);
   this.y = random(-500, -50);
   this.z = random(0, 20);
   this.len = map(this.z, 0, 20, 10, 20);
-  this.r = 138;
-  this.g = 43;
-  this.b = 226;
+  this.color = colorList[7]
   this.yspeed = map(this.z, 0, 20, 1, 20);
 
   this.fall = function() {
@@ -22,17 +34,10 @@ function Drop() {
   this.show = function() {
     var thick = map(this.z, 0, 20, 1, 3);
     strokeWeight(thick);
-    stroke(this.r, this.g, this.b);
+    stroke(this.color);
     line(this.x, this.y, this.x, this.y + this.len);
   };
-  this.changeColor = function(r, g, b) {
-    this.r = r;
-    this.g = g;
-    this.b = b;
-  }
-  this.randomChange = function() {
-    this.r = random(1, 255);
-    this.g = random(1, 255);
-    this.b = random(1, 255);
+  this.changeColor = function(newColor) {
+    this.color = newColor;
   }
 }
