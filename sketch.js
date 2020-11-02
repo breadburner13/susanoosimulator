@@ -1,6 +1,8 @@
 var drops = [];
 var r, g, b; 
 var command;
+var startrainbutton;
+var stoprainbutton;
 
 function setup() {
   createCanvas(640, 360);
@@ -9,19 +11,18 @@ function setup() {
   }
   createElement("h1", "let there be...");
   command = createInput("...");
+  startrainbutton = createButton("start rain");
+  stoprainbutton = createButton("stop rain");
 }
 
 function draw() {
   background(230, 230, 250);
+  startrainbutton.mousePressed(neverEndingRain);
+  stoprainbutton.mousePressed(theRainStopped);
   for (var i = 0; i < drops.length; i++) {
     drops[i].fall();
     drops[i].show();
   }
-  // if(keyIsPressed) {
-  //   for (drop of drops) {
-  //     drop.randomChange();
-  //   }
-  // }
   if (command.value() == "red") {
     this.r = 255;
     this.g = 0;
@@ -38,5 +39,13 @@ function mousePressed() {
   this.b = random(1, 255);
   for (drop of drops) {
     drop.changeColor(this.r, this.g, this.b);
+  }
+}
+function theRainStopped() {
+    drops.length = 0;
+}
+function neverEndingRain() {
+  for (var i = 0; i < 500; i++) {
+    drops[i] = new Drop();
   }
 }
