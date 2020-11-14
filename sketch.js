@@ -9,6 +9,7 @@ var apiURLstart = "http://api.openweathermap.org/data/2.5/weather?q=";
 var apiKey = "&appid=0f3081125572ff5aa911ebe810c0417d&units=imperial";
 var weatherData;
 var commandprompt;
+var splitcommands;
 
 function setup() {
   createCanvas(640, 360);
@@ -20,6 +21,7 @@ function setup() {
   }
   var button = select('#Try');
   button.mousePressed(weatherAsk);
+  //button.mousePressed(processCommands);
   commandprompt = select('#command');
 }
 
@@ -115,64 +117,64 @@ function Cloud() {
 }
 
 // function processCommands() {
-//   splitcommands = split(this.value(), ' ');
+//   splitcommands = split(commandprompt.value(), ' ');
 //   for (acommand of splitcommands) {
 //     print(acommand);
-//     if (acommand == "red") {
+//     if (acommand.toLowerCase() == "red") {
 //       this.newcolor = colorList[0];
 //       for (var i = 0; i < drops.length; i++) {
 //         drops[i].changeColor(this.newcolor);
 //       }
 //     }
-//     if (acommand == "orange") {
+//     if (acommand.toLowerCase() == "orange") {
 //       this.newcolor = colorList[1];
 //       for (var i = 0; i < drops.length; i++) {
 //         drops[i].changeColor(this.newcolor);
 //       }
 //     }
-//     if (acommand == "yellow") {
+//     if (acommand.toLowerCase() == "yellow") {
 //       this.newcolor = colorList[2];
 //       for (var i = 0; i < drops.length; i++) {
 //         drops[i].changeColor(this.newcolor);
 //       }
 //     }
-//     if (acommand == "green") {
+//     if (acommand.toLowerCase() == "green") {
 //       this.newcolor = colorList[3];
 //       for (var i = 0; i < drops.length; i++) {
 //         drops[i].changeColor(this.newcolor);
 //       }
 //     }
-//     if (acommand == "blue") {
+//     if (acommand.toLowerCase() == "blue") {
 //       this.newcolor = colorList[4];
 //       for (var i = 0; i < drops.length; i++) {
 //         drops[i].changeColor(this.newcolor);
 //       }
 //     }
-//     if (acommand == "indigo") {
+//     if (acommand.toLowerCase() == "indigo") {
 //       this.newcolor = colorList[5];
 //       for (var i = 0; i < drops.length; i++) {
 //         drops[i].changeColor(this.newcolor);
 //       }
 //     }
-//     if (acommand == "violet") {
+//     if (acommand.toLowerCase() == "violet") {
 //       this.newcolor = colorList[6];
 //       for (var i = 0; i < drops.length; i++) {
 //         drops[i].changeColor(this.newcolor);
 //       }
 //     }
-//     if (acommand == "purple") {
+//     if (acommand.toLowerCase() == "purple") {
 //       this.newcolor = colorList[7];
 //       for (var i = 0; i < drops.length; i++) {
 //         drops[i].changeColor(this.newcolor);
 //       }
 //     }
-//     if (acommand == "white") {
+//     if (acommand.toLowerCase() == "white") {
 //       this.newcolor = colorList[8];
 //       for (var i = 0; i < drops.length; i++) {
 //         drops[i].changeColor(this.newcolor);
 //       }
 //     }
-//     if (acommand == "black") {
+//     if (acommand.toLowerCase() == "black") {
 //       this.newcolor = colorList[9];
 //       for (var i = 0; i < drops.length; i++) {
 //         drops[i].changeColor(this.newcolor);
