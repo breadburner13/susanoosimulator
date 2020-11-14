@@ -3,39 +3,39 @@
 // Credit to TheCodingTrain (https://thecodingtrain.com/) for the inspiration
 
 var drops = [];
-var commandprompt;
-var splitcommands;
-var startRainButton;
-var stopRainButton;
-var changeColorButton;
+var clouds = [];
 var newColor;
 var apiURLstart = "http://api.openweathermap.org/data/2.5/weather?q="; 
-var cityName;
-var apiKey = "&appid=0f3081125572ff5aa911ebe810c0417d";
+var apiKey = "&appid=0f3081125572ff5aa911ebe810c0417d&units=imperial";
 var weatherData;
+var commandprompt;
 
 function setup() {
   createCanvas(640, 360);
   for (var i = 0; i < 500; i++) {
     drops[i] = new Drop();
   }
-  createElement("h1", "change color to...");
-  commandprompt = createInput("");  
-  submitCommandPrompt = createButton("Try");
-  submitCommandPrompt.mousePressed(weatherAsk);
-  submitCommandPrompt.mousePressed(processCommand);
-  //commandprompt.changed(processCommands);
-  startRainbutton = createButton("Never Ending Rain");
-  stopRainbutton = createButton("The Rain Stopped");
+  for (var i = 0; i < 8; i++) {
+    clouds[i] = new Cloud();
+  }
+  var button = select('#Try');
+  button.mousePressed(weatherAsk);
+  commandprompt = select('#command');
 }
 
 function draw() {
   background(230, 230, 250);
-  startRainbutton.mousePressed(neverEndingRain);
-  stopRainbutton.mousePressed(theRainStopped);
-  for (var i = 0; i < drops.length; i++) {
-    drops[i].fall();
-    drops[i].show();
+  if(drops.length > 0) {
+    for (var i = 0; i < drops.length; i++) {
+      drops[i].fall();
+      drops[i].show();
+    }
+  }
+  if(clouds.length > 0) {
+    for (var i = 0; i < clouds.length; i++) {
+      clouds[i].move();
+      clouds[i].display();
+    }
   }
 }
 
@@ -46,16 +46,38 @@ function weatherAsk() {
 
 function gotData(data) {
   weatherData = data;
-  print(weatherData.weather[0].main);
+  var command = weatherData.weather[0].main;
+  if(command == "Rain") {
+    neverEndingRain();
+    neverEndingClouds();
+  }
+  else if(command == "Clear"){
+    theRainStopped();
+    theCloudsStopped();
+  }
+  else if(command == "Clouds") {
+    theRainStopped();
+    neverEndingClouds();
+  }
 }
 
 function theRainStopped() {
-    drops.length = 0;
+  drops.length = 0;
 }
 
 function neverEndingRain() {
   for (var i = 0; i < 500; i++) {
     drops[i] = new Drop();
+  }
+}
+
+function theCloudsStopped() {
+  clouds.length = 0;
+}
+
+function neverEndingClouds() {
+  for (var i = 0; i < 8; i++) {
+    clouds[i] = new Cloud();
   }
 }
 
@@ -66,15 +88,29 @@ function showtime () {
   }
 }
 
-function processCommand() {
-  weatherAsk();
-  var command = weatherData.weather[0].main;
-  print(command);
-  if (command != "Rain") {
-    theRainStopped();
+function Cloud() {
+  this.x = random(0, width);
+  this.y = random(0, height / 3);
+  
+  this.display = function() {
+   stroke(255);
+    strokeWeight(1);
+    fill(255);
+    ellipse(this.x, this.y, 24, 24);
+    ellipse(this.x+10,this.y+10,24,24);
+    ellipse(this.x+30,this.y+10,24,24);
+    ellipse(this.x+30,this.y-10,24,24);
+    ellipse(this.x+20,this.y-10,24,24);
+    ellipse(this.x+40,this.y,24,24);
   }
-  else if(command == "Rain") {
-    neverEndingRain();
+  
+  this.move = function() {
+    this.x = this.x += 1 ;
+    this.y = this.y + random(-1, 1);
+    
+    if(this.x >= width){
+    this.x = 0;
+    }
   }
 }
 
