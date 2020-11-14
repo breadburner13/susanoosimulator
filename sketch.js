@@ -5,7 +5,7 @@
 var drops = [];
 var clouds = [];
 var newColor;
-var apiURLstart = "http://api.openweathermap.org/data/2.5/weather?q="; 
+var apiURLstart = "https://api.openweathermap.org/data/2.5/weather?q="; 
 var apiKey = "&appid=0f3081125572ff5aa911ebe810c0417d&units=imperial";
 var weatherData;
 var commandprompt;
