@@ -12,7 +12,7 @@ var commandprompt;
 var splitcommands;
 
 function setup() {
-  createCanvas(640, 360);
+  createCanvas(displayWidth, displayHeight);
   for (var i = 0; i < 500; i++) {
     drops[i] = new Drop();
   }
